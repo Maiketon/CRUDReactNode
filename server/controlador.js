@@ -24,14 +24,14 @@ db.connect((err) => {
     }
     console.log('Conexión establecida con éxito a la base de datos');
 });
-
-
 //Abrimos el puerto por el que esta leyendo el front con el back//
 app.listen(3001,()=>
 {
     console.log("Estoy escuchando por parte del controlador");
 }) //Nuestra app va a escucchar por el puerto 3001/
 
+
+//Primera funcion por asi decirlo para guardar datos//
 app.post("/create",(peticion,res)=> //Esta es lapeticion que creamos para guardar los datos//
 //peticion --> conjunto de arreglo que le llegan ... res--> Si la op fue exitosa envia un send al front
 {
@@ -51,6 +51,25 @@ app.post("/create",(peticion,res)=> //Esta es lapeticion que creamos para guarda
         else
         {
             res.send("Empleado registrado correctamente!!!");
+        }
+    });
+});
+
+
+app.get("/empleados",(peticion,res)=> //Esta es lapeticion que creamos para guardar los datos//
+//peticion --> conjunto de arreglo que le llegan ... res--> Si la op fue exitosa envia un send al front
+{
+
+    db.query('SELECT * FROM empleados',
+    (err,result)=>{
+        if (err)
+        {
+            console.log("Hubo un error");
+            console.log(err);
+        }
+        else
+        {
+            res.send(result);
         }
     });
 });

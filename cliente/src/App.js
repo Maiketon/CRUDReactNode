@@ -16,6 +16,8 @@ function App() {
     alert(nombre+edad+pais+cargo+anios);
   }
 
+
+    //Realiza una peticion al servidor para guardar datos en Bd//
   const agregarDatos = () =>
   {
       Axios.post("http://localhost:3001/create",{
