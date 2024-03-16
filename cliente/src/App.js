@@ -11,10 +11,12 @@ function App() {
   const [anios,setAnios] = useState(0); //Variables que gestionan los valores d elos campos Recordemos que 
   // Variable que va almacenar el valor, Funcion que manda el acceso a la variable.
 
-  const mostrarDatos = () =>
-  {
-    alert(nombre+edad+pais+cargo+anios);
-  }
+  const [empleadosList,setEmpleados] = useState([]);
+
+  // const mostrarDatos = () =>
+  // {
+  //   alert(nombre+edad+pais+cargo+anios);
+  // }
 
 
     //Realiza una peticion al servidor para guardar datos en Bd//
@@ -28,9 +30,21 @@ function App() {
         anios: anios
       }).then(()=>
       {
+        getEmpleados();
         alert("Empleado registrado");
       });
   }
+  const getEmpleados = () =>
+  {
+      Axios.get("http://localhost:3001/empleados").then((response)=>
+      {
+        setEmpleados (response.data);
+      });
+  }
+
+  //Otra forma es mandar a llamar el metodo aqui el metodo de obtener datos, para que siempre que se inicialice el servidor
+  // se muestre en pantalla la informacion
+  getEmpleados();
 
 
 
@@ -53,7 +67,15 @@ function App() {
         <label>Años: <input type='number'onChange={(event) => {
           setAnios(event.target.value);
         }}/></label> <br/>
-        <button onClick={agregarDatos}>Registrar</button>
+        <button onClick={agregarDatos}>Registrar</button> <br/>
+        <div className='lista'>
+        {
+          empleadosList.map((val,key)=>
+          {
+            return <div className=''>{val.nombre}<br/></div>
+          })
+        }
+        </div>
       </div>
     </div>
   );
