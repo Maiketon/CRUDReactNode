@@ -45,40 +45,104 @@ function App() {
 
   //Otra forma es mandar a llamar el metodo aqui el metodo de obtener datos, para que siempre que se inicialice el servidor
   // se muestre en pantalla la informacion
-  getEmpleados();
+  // getEmpleados();
 
 
 
   return (
-    <div className="App">
-      <div className='datos'>
-        <label>Nombre: <input type='text'onChange={(event)=>{
-          setNombre(event.target.value);
-        }}/></label> <br/>
-        <label>Edad: <input type='number' onChange={(event)=>{
-          setEdad(event.target.value);
-        }} /></label> <br/>
-        <label>Pais: <input type='text' onChange={(event)=>
-        {
-          setPais(event.target.value);
-        }}/></label> <br/>
-        <label>Cargo: <input type='text' onChange={(event)=>{
-          setCargo(event.target.value);
-        }}/></label> <br/>
-        <label>Años: <input type='number'onChange={(event) => {
-          setAnios(event.target.value);
-        }}/></label> <br/>
-        <button className='btn btn-success' onClick={agregarDatos}>Registrar</button> <br/>
-        <div className='lista'>
-        {
-          empleadosList.map((val,key)=>
-          {
-            return <div className=''>{val.nombre}<br/></div>
-          })
-        }
-        </div>
+    <div className='container'>
+      <div className="App">
+
+      <div className="card text-center">
+              <div className="card-header">
+               Ingrese información
+              </div>
+            
+            <div className="card-body">
+               <div className="input-group mb-3">
+                 <span className="input-group-text" id="basic-addon1">Nombre:</span>
+                  <input type="text" 
+                    onChange={(event)=>{
+                      setNombre(event.target.value);
+                    }}
+                  className="form-control" placeholder="Ingrese su nombre" aria-label="Username" aria-describedby="basic-addon1"/>
+               </div>
+
+               <div className="input-group mb-3">
+                 <span className="input-group-text" id="basic-addon1">Edad:</span>
+                  <input type="number" 
+                    onChange={(event)=>{
+                      setEdad(event.target.value);
+                    }} 
+                  className="form-control" placeholder="Ingrese su Edad" aria-label="Username" aria-describedby="basic-addon1"/>
+               </div>
+
+               <div className="input-group mb-3">
+                 <span className="input-group-text" id="basic-addon1">Pais:</span>
+                  <input type="text" 
+                    onChange={(event)=>
+                      {
+                        setPais(event.target.value);
+                      }}
+                  className="form-control" placeholder="Ingrese su Pais" aria-label="Username" aria-describedby="basic-addon1"/>
+               </div>
+
+               <div className="input-group mb-3">
+                 <span className="input-group-text" id="basic-addon1">Cargo:</span>
+                  <input type="text" 
+                    onChange={(event)=>{
+                      setCargo(event.target.value);
+                    }}
+                  className="form-control" placeholder="Ingrese su Cargo" aria-label="Username" aria-describedby="basic-addon1"/>
+               </div>
+
+               <div className="input-group mb-3">
+                 <span className="input-group-text" id="basic-addon1">Años:</span>
+                  <input type="number" 
+                    onChange={(event) => {
+                      setAnios(event.target.value);
+                    }}
+                  className="form-control" placeholder="Ingrese su edad ejerciendo" aria-label="Username" aria-describedby="basic-addon1"/>
+               </div>
+            </div>
+            <div className="card-footer text-body-secondary">
+              <button className='btn btn-success me-3' onClick={agregarDatos}>Registrar</button>
+              <button className='btn btn-success' onClick={getEmpleados}>Listar</button><br/>
+            </div>
       </div>
+      <table className="table table-striped">
+              <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Edad</th>
+              <th scope="col">Pais</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Años de experiencia</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            empleadosList.map((val,key)=>
+            {
+              return <tr key={val.id}>
+              <th>{val.id}</th>
+              <td>{val.nombre}</td>
+              <td>{val.edad}</td>
+              <td>{val.pais}</td>
+              <td>{val.cargo}</td>
+              <td>{val.anios}</td>
+            </tr>
+            })
+          }
+           
+          </tbody>
+      </table>
+        
+
+
     </div>
+  </div>
   );
 }
 
