@@ -75,3 +75,27 @@ app.get("/empleados",(peticion,res)=> //Esta es lapeticion que creamos para guar
 });
 
 
+
+app.put("/update",(peticion,res)=> //Esta es lapeticion que creamos para guardar los datos//
+//peticion --> conjunto de arreglo que le llegan ... res--> Si la op fue exitosa envia un send al front
+{
+    const id = peticion.body.id;
+    const nombre = peticion.body.nombre;
+    const edad = peticion.body.edad;
+    const pais = peticion.body.pais;
+    const cargo = peticion.body.cargo;
+    const anios = peticion.body.anios;
+
+    db.query('UPDATE empleados SET nombre=?,edad=?,pais=?,cargo=?,anios=? WHERE id=?',[nombre,edad,pais,cargo,anios,id],
+    (err,result)=>{
+        if (err)
+        {
+            console.log("Hubo un error al actualiar los datos");
+            console.log(err);
+        }
+        else
+        {
+            res.send("Empleado actualizado correctamente!!!");
+        }
+    });
+});
