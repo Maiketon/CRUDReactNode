@@ -1,6 +1,7 @@
 import './App.css';
 import {useState} from "react";
 import Axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css'; //SE IMPORTA BOOSTRAP DENTRO DE REACT//
 
 function App() {
 
@@ -67,7 +68,7 @@ function App() {
         <label>Años: <input type='number'onChange={(event) => {
           setAnios(event.target.value);
         }}/></label> <br/>
-        <button onClick={agregarDatos}>Registrar</button> <br/>
+        <button className='btn btn-success' onClick={agregarDatos}>Registrar</button> <br/>
         <div className='lista'>
         {
           empleadosList.map((val,key)=>
