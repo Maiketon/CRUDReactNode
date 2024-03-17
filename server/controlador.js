@@ -99,3 +99,22 @@ app.put("/update",(peticion,res)=> //Esta es lapeticion que creamos para guardar
         }
     });
 });
+
+
+
+app.delete("/delete/:id", (peticion, res)=>
+{
+    const id = peticion.params.id;
+    db.query('DELETE FROM empleados WHERE id=?',id,
+    (err,result)=>{
+        if (err)
+        {
+            console.log("Hubo un error al eliminar los datos");
+            console.log(err);
+        }
+        else
+        {
+            res.send("Empleado Eliminado correctamente!!!");
+        }
+    });
+});

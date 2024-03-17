@@ -2,9 +2,12 @@ import './App.css';
 import {useState} from "react";
 import Axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css'; //SE IMPORTA BOOSTRAP DENTRO DE REACT//
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 function App() {
-
+  const MySwal = withReactContent(Swal)
   const [nombre,setNombre] = useState("");
   const [edad,setEdad] = useState();
   const [pais,setPais] = useState("");
@@ -37,7 +40,12 @@ function App() {
       }).then(()=>
       {
         getEmpleados();
-        alert("Empleado registrado");
+        limpiarCampo();
+        Swal.fire({
+          title:" Registro Exitoso !!",
+          html: "El usuario se ha registrado en el sistema de forma correcta.",
+          icon: 'success'
+        });
       });
   }
   // Realiza el update al empleado
@@ -53,6 +61,19 @@ function App() {
       }).then(()=>
       {
         getEmpleados();
+        limpiarCampo();
+      });
+  }
+  const borrarEmpleado = (id) =>
+  {
+       Axios.delete(`http://localhost:3001/delete/${id}`).then(()=>
+      {
+        getEmpleados();
+        Swal.fire({
+          title:" Usuario eliminado !!",
+          html: "El usuario se borrado del sistema.",
+          icon: 'success'
+        });
       });
   }
   //Limpiar campos
@@ -193,7 +214,10 @@ function App() {
                 onClick={()=>{
                 editarEmpleado(val);
                 }}>Editar</button>
-                <button type="button" className="btn btn-danger">Eliminar</button>
+                <button type="button" onClick={() =>
+                {
+                  borrarEmpleado(val.id);
+                }} className="btn btn-danger">Eliminar</button>
 
               </div>
               </td>
